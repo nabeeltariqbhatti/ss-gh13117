@@ -1,8 +1,14 @@
 package com.example.ssgh13117;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.event.EventListener;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.authentication.event.AbstractAuthenticationFailureEvent;
+import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -52,6 +58,7 @@ public class SsGh13117Application {
         return new InMemoryUserDetailsManager(userDetails);
     }
 
+
 }
 
 @RestController
@@ -66,3 +73,24 @@ class DemoController{
         return "invalid";
     }
 }
+
+
+//    @Autowired
+//    private JavaMailSender mailSender;
+//    @EventListener
+//    public void loginEventListener(AuthenticationSuccessEvent authenticationSuccessEvent){
+//        UserDetails principal = (UserDetails) authenticationSuccessEvent.getAuthentication().getPrincipal();
+//        System.out.println(principal.getUsername());
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setTo("nabeeltaariq@gmail.com");
+//        message.setSubject("hello");
+//        message.setText("here");
+//
+//        mailSender.send(message);
+//    }
+//
+//    @EventListener
+//    public void onFailure(AbstractAuthenticationFailureEvent failures) {
+//        System.out.println(failures);
+//    }
+
